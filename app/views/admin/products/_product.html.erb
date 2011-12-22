@@ -1,0 +1,24 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(product) -%>">
+  <span class='title'>
+    <%= product.name %>
+    <span class="preview">
+		<br> 
+		<%= fields_for "products[]", product do |f| %>
+			<b>Price:</b>  <%= f.text_field :price, :size => 5%>
+		<% end %>
+		
+	</span>
+  </span>
+  <span class='actions'>
+    <%= link_to refinery_icon_tag("application_go.png"), product_path(product),
+        :title => t('.view_live_html'),
+        :target => "_blank" %>
+    <%= link_to refinery_icon_tag("application_edit.png"), edit_admin_product_path(product),
+         :title => t('.edit') %>
+    <%= link_to refinery_icon_tag("delete.png"), admin_product_path(product),
+        :class => "cancel confirm-delete",
+        :title => t('.delete'),
+        :confirm => t('message', :scope => 'shared.admin.delete', :title => product.name),
+        :method => :delete %>
+  </span>
+</li>

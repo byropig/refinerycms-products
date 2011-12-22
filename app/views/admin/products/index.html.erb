@@ -1,0 +1,12 @@
+<section id='records'>
+  <%= render :partial => 'records' %>
+</section>
+<!-- <aside id='actions'> -->
+<nav id='actions' class='multilist'>
+  <%= render :partial => 'actions' %>
+</nav>
+<!-- </aside> -->
+<%= render :partial => '/shared/admin/make_sortable',
+            :locals => {
+              :tree => false
+            } if !searching? and Admin::ProductsController.sortable? and Product.count > 1 %>

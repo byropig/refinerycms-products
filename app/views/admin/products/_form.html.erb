@@ -1,0 +1,115 @@
+<%= form_for [:admin, @product] do |f| -%>
+  <%= render :partial => "/shared/admin/error_messages", :locals => {
+          :object => @product,
+          :include_object_name => true
+        } %>
+  
+  <div class='field'>
+    <%= f.label :name -%>
+    <%= f.text_field :name, :class => 'larger widest'  -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :description -%>
+    <%= f.text_field :description, :class => 'larger widest'  -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :tag_list -%>
+    <%= f.text_field :tag_list  -%>
+  </div>
+  
+  <div class='field'>
+    <div id='page-tabs' class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
+      <ul id='page_parts'>
+        <% [:summary].each_with_index do |part, part_index| %>
+          <li class='ui-state-default<%= ' ui-state-active' if part_index == 0 %>'>
+            <%= link_to part.to_s.titleize, "##{part}" %>
+          </li>
+        <% end %>
+      </ul>
+
+      <div id='page_part_editors'>
+        <% [:summary].each do |part| %>
+          <div class='page_part' id='<%= part %>'>
+            <%= f.text_area part, :rows => 20, :class => 'wymeditor widest' -%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :price -%>
+    <%= f.text_field :price  -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :image -%>
+    <%= render :partial => "/shared/admin/image_picker", :locals => {
+          :f => f,
+          :field => :image_id,
+          :image => @product.image,
+          :toggle_image_display => false
+        } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :categories %>
+    <% for category in Category.find(:all) %>
+		<% if category.children.present? %>	
+			<div>
+				<% if @product.categories.include?(category) %>
+					<%= check_box_tag "product[category_ids][]", category.id, @product.categories.include?(category) %>
+				<% else %>
+					<img src="/images/arrow.png" height="13px" width="13px" style="margin:3px; vertical-align:bottom;">
+				<% end %>
+		        <%= raw category.name %>
+		    </div>
+			<% category.children.each do |child_category| %>
+				<div style="margin-left:18px;">
+			        <%= check_box_tag "product[category_ids][]", child_category.id, @product.categories.include?(child_category) %>
+			        <%= child_category.name %>
+			    </div>
+			<% end %>
+		<% else %>
+			<% unless category.parent.present? %>
+			    <div>
+			        <%= check_box_tag "product[category_ids][]", category.id, @product.categories.include?(category) %>
+			        <%= category.name %>
+			    </div>
+			<% end %>
+		<% end %>
+    <% end %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :best_seller -%>
+    <%= f.check_box :best_seller  -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :new_product -%>
+    <%= f.check_box :new_product  -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :featured -%>
+    <%= f.check_box :featured  -%>
+  </div>
+  
+  <%= render :partial => "/shared/admin/form_actions",
+              :locals => {
+                :f => f,
+                :continue_editing => false,
+                :delete_title => t('delete', :scope => 'admin.products.product'),
+                :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @product.name)
+              } %>
+<% end -%>
+<% content_for :javascripts do %>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });
+  </script>
+<% end %>

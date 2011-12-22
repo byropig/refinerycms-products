@@ -1,0 +1,25 @@
+lolcat:
+  shared:
+    admin:
+      image_picker:
+        image: IMAGE
+  plugins:
+    products:
+      title: Products
+  admin:
+    products:
+      actions:
+        create_new: CREATE NEW Product
+        reorder: REORDR Products
+        reorder_done: DUN REORDERIN Products
+      records:
+        title: Products
+        sorry_no_results: SRY! THAR R NO RESULTS FINDZ.
+        no_items_yet: THAR R NO Products YET. CLICK "CREATE NEW Product" 2 ADD UR FURST product.
+      product:
+        view_live_html: VIEW DIS product LIV <BR/><EM>(OPENS IN NEW WINDOW)</EM>
+        edit: EDIT DIS product
+        delete: REMOOV DIS product FOREVR
+  products:
+    show:
+      other: OTHR Products

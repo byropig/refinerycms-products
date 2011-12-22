@@ -1,0 +1,21 @@
+nl:
+  plugins:
+    products:
+      title: Products
+  admin:
+    products:
+      actions:
+        create_new: Maak een nieuwe Product
+        reorder: Wijzig de volgorde van de Products
+        reorder_done: Klaar met het wijzingen van de volgorde van de Products
+      records:
+        title: Products
+        sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+        no_items_yet: Er zijn nog geen Products. Druk op 'Maak een nieuwe Product' om de eerste aan te maken.
+      product:
+        view_live_html: Bekijk deze product op de website <br/><em>(opent een nieuw venster)</em>
+        edit: Bewerk deze product
+        delete: Verwijder deze product voor eeuwig
+  products:
+    show:
+      other: Andere Products

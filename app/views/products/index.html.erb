@@ -1,0 +1,28 @@
+<% content_for :body_content_title do %>
+  Catalogue - <%= @page_title %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  	
+
+    <% if @products.blank? %>
+		<p><i>There are no products loaded for this category yet. Or we're temporarily out of stock - check back soon.</i></p>
+	<% else %>
+			
+			<%= content_tag('p', raw(@category.description)) if @category.present? %>
+
+			<% @products.each do |product| %>
+				<div class="pod quarter product omega">
+					<div class="corner"><img src="/images/corner.png" /></div>
+					<%= link_to(image_fu(product.image, "200x200#c"), product_path(product)) %>
+					<hr>
+					<div class="productname"><%= raw product.name %></div>	
+					<p><i><%= raw product.description %></i></p>
+					<div class="add_to_cart"><p><%= link_to "Details", product_path(product) %> | <%= link_to(image_tag("/images/cart.png"), add_to_cart_path(product, :category_id => @category)) %></p></div>
+				</div>
+		    <% end %>
+		
+	<% end %>
+<% end %>
+
+<%= render :partial => "/shared/content_page" %>

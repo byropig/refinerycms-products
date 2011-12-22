@@ -1,0 +1,21 @@
+nb:
+  plugins:
+    products:
+      title: Products
+  admin:
+    products:
+      actions:
+        create_new: Lag en ny Product
+        reorder: Endre rekkefølgen på Products
+        reorder_done: Ferdig å endre rekkefølgen Products
+      records:
+        title: Products
+        sorry_no_results: Beklager! Vi fant ikke noen resultater.
+        no_items_yet: Det er ingen Products enda. Klikk på "Lag en ny Product" for å legge til din første product.
+      product:
+        view_live_html: Vis hvordan denne product ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+        edit: Rediger denne product
+        delete: Fjern denne product permanent
+  products:
+    show:
+      other: Andre Products

@@ -1,0 +1,13 @@
+<ul id='sortable_list'>
+	<!-- <%#= form_tag([:admin, @product], :method => 'post') do %> -->
+	<%= form_tag(update_prices_admin_products_path, {:method => :put}) do %>
+  		<%= render :partial => 'product', :collection => @products %>
+		<%= submit_tag "Edit Prices" %>
+	<% end %>
+</ul>
+
+
+<%= render :partial => "/shared/admin/sortable_list",
+            :locals => {
+              :continue_reordering => (local_assigns.keys.include?(:continue_reordering)) ? continue_reordering : true
+            } %>

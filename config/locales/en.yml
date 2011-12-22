@@ -1,0 +1,25 @@
+en:
+  shared:
+    admin:
+      image_picker:
+        image: image
+  plugins:
+    products:
+      title: Products
+  admin:
+    products:
+      actions:
+        create_new: Add New Product
+        reorder: Reorder Products
+        reorder_done: Done Reordering Products
+      records:
+        title: Products
+        sorry_no_results: Sorry! There are no results found.
+        no_items_yet: There are no Products yet. Click "Add New Product" to add your first product.
+      product:
+        view_live_html: View this product live <br/><em>(opens in a new window)</em>
+        edit: Edit this product
+        delete: Remove this product forever
+  products:
+    show:
+      other: Other Products
