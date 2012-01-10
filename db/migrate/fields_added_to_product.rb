@@ -1,4 +1,4 @@
-class AddFieldsToProduct < ActiveRecord::Migration
+class FieldsAddedToProduct < ActiveRecord::Migration
   def self.up
     add_column :products, :best_seller, :boolean
     add_column :products, :featured, :boolean
