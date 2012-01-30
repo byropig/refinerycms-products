@@ -27,6 +27,7 @@ class Product < ActiveRecord::Base
   belongs_to :image
   has_and_belongs_to_many :categories  
   has_many :line_items
+  has_many :variants
   
   def validate_category
     categories.each do |category|

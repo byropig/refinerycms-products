@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+  include ActionView::Helpers::NumberHelper
   before_filter :find_all_products, :only => :index
   before_filter :find_page
 
@@ -20,6 +20,20 @@ class ProductsController < ApplicationController
     present(@page)
   end
 
+  def get_variant_image
+    if params[:variant_id].present?
+      variant_url = Variant.find(params[:variant_id]).image.url
+    end
+    render :text => variant_url    
+  end
+  
+  def get_variant_price
+    if params[:variant_id].present?
+      variant_price = Variant.find(params[:variant_id]).price
+    end
+    render :text => number_to_currency(variant_price, :unit => 'R')   
+  end
+  
 protected
 
   def find_all_products

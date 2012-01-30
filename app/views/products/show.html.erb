@@ -5,12 +5,19 @@
 <% content_for :body_content_left do %>
     <div class="pod threequarter product_wider alpha">
 		<div class="corner"><img src="/images/corner.png" /></div>
-		<div class="image"><%= image_fu(@product.image, "400x400#c") %></div>
+		<div class="image"><%= image_fu(@product.image, "400x400#c", :id => "variant_id") %></div>
 		<hr>
 		<div class="productname"><%= raw @product.name %></div>	
 		<p><i><%= raw @product.summary %></i></p>
-		Price: <%= raw rands(@product.price) %>		
-		<div class="add_to_cart"><p><%= link_to(image_tag("/images/cart.png"), add_to_cart_path(@product)) %></p></div>
+		<div class="price">Price: <%= raw rands(@product.price) %></div></p>	
+		<div class="add_to_cart">
+			<%= form_tag(add_to_cart_path(@product)) do |f| %>				
+				<% if @product.variants.any? %>
+					<%= collection_select(:variant, :id, @product.variants, :id, :name, {}, {:class => "variant"})  -%>				
+				<% end %>
+				<p><%= image_submit_tag("/images/cart.png") %></p>
+			<% end %>
+		</div>
 	</div>
 
 	<% if @tagged_products.any? %>
@@ -19,11 +26,13 @@
 			<% unless product.id == @product.id %>
 				<div class="pod quarter product omega">
 					<div class="corner"><img src="/images/corner.png" /></div>
-					<%= link_to(image_fu(product.image, "200x200#c"), product_path(product)) %>
+					<%= link_to(image_fu(product.image, "200x200#c", :id => "variant_id"), product_path(product)) %>
 					<hr>
 					<div class="productname"><%= raw product.name %></div>	
 					<p><i><%= raw product.description %></i></p>
-					<div class="add_to_cart"><p><%= link_to "Details", product_path(product) %> | <%= link_to(image_tag("/images/cart.png"), add_to_cart_path(product)) %></p></div>
+					<div class="add_to_cart">
+							<p><%= link_to "Details", product_path(product) %></p>						
+					</div>
 				</div>
 			<% end %>
 	    <% end %>
@@ -31,5 +40,26 @@
 <% end %>
 
 
-
 <%= render :partial => "/shared/content_page" %>
+
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('.variant').change(function() {  
+		change_variant();
+	});
+
+	change_variant();
+
+	function change_variant() {  
+		var currentId = $('.variant').val();
+    	
+		$.get('/get_variant_image/'+currentId, function(data) {
+		  $('img#variant_id').attr('src', data);
+		});
+
+		$.get('/get_variant_price/'+currentId, function(data) {
+		  $('.price').html('Price: '+data);
+		});
+	}	
+}); 
+</script>
