@@ -25,19 +25,19 @@
   <li>
     <%= link_to t('.create_new'), new_admin_product_path,
                  :class => "add_icon" %>
-  </li>
-<% if !searching? and Admin::ProductsController.sortable? and Product.count > 1 %>
+ </li>
+<!--  <%# if !searching? and Admin::ProductsController.sortable? and Product.count > 1 %>
   <li class='not_a_link'>
-    <%= link_to t('.reorder', :what => "Products"),
+    <%#= link_to t('.reorder', :what => "Products"),
                  admin_products_path,
                  :id => "reorder_action",
                  :class => "reorder_icon" %>
 
-    <%= link_to t('.reorder_done', :what => "Products"),
+    <%#= link_to t('.reorder_done', :what => "Products"),
                  admin_products_path,
                  :id => "reorder_action_done",
                  :style => "display: none;",
                  :class => "reorder_icon" %>
   </li>
-<% end %>
+<%# end %> -->
 </ul>
