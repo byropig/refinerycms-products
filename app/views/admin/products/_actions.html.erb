@@ -26,18 +26,23 @@
     <%= link_to t('.create_new'), new_admin_product_path,
                  :class => "add_icon" %>
  </li>
-<!--  <%# if !searching? and Admin::ProductsController.sortable? and Product.count > 1 %>
+<% if !params[:edit_prices].present? %> 
+  <% if !searching? and Admin::ProductsController.sortable? and Product.count > 1 %>
+    <li class='not_a_link'>
+      <%= link_to t('.reorder', :what => "Products"),
+                   admin_products_path,
+                   :id => "reorder_action",
+                   :class => "reorder_icon" %>
+  
+      <%= link_to t('.reorder_done', :what => "Products"),
+                   admin_products_path,
+                   :id => "reorder_action_done",
+                   :style => "display: none;",
+                   :class => "reorder_icon" %>
+    </li>
+  <% end %>
   <li class='not_a_link'>
-    <%#= link_to t('.reorder', :what => "Products"),
-                 admin_products_path,
-                 :id => "reorder_action",
-                 :class => "reorder_icon" %>
-
-    <%#= link_to t('.reorder_done', :what => "Products"),
-                 admin_products_path,
-                 :id => "reorder_action_done",
-                 :style => "display: none;",
-                 :class => "reorder_icon" %>
+    <%= link_to("Edit Product Prices", admin_products_path(:edit_prices => true)) %>
   </li>
-<%# end %> -->
+<% end %>  
 </ul>

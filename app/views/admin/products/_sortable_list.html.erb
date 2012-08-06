@@ -1,9 +1,12 @@
 <ul id='sortable_list'>
-	<!-- <%#= form_tag([:admin, @product], :method => 'post') do %> -->
-	<%= form_tag(update_prices_admin_products_path, {:method => :put}) do %>
-  		<%= render :partial => 'product', :collection => @products %>
-		<%= submit_tag "Edit Prices" %>
-	<% end %>
+  <% if params[:edit_prices].present? %>	
+  	<%= form_tag(update_prices_admin_products_path, {:method => :put}) do %>
+    		<%= render :partial => 'product', :collection => @products %>
+  		<%= submit_tag "Edit Prices" %>
+  	<% end %>
+  <% else %>
+    	<%= render :partial => 'product', :collection => @products %>
+  <% end %>	
 </ul>
 
 

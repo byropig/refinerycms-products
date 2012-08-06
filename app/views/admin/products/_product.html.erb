@@ -2,10 +2,12 @@
   <span class='title'>
     <%= product.name %>
     <span class="preview">
-		<br> 
-		<%= fields_for "products[]", product do |f| %>
-			<b>Price:</b>  <%= f.text_field :price, :size => 5%>
-		<% end %>
+		<br>
+		<% if params[:edit_prices].present? %> 
+  		<%= fields_for "products[]", product do |f| %>
+  			<b>Price:</b>  <%= f.text_field :price, :size => 5%>
+  		<% end %>
+  	<% end %>	
 		
 	</span>
   </span>
